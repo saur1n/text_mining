@@ -5,10 +5,10 @@
 
 ##### INITIALIZE
 # Install
-install.packages("tm")  # for text mining
-install.packages("SnowballC") # for text stemming
-install.packages("wordcloud") # word-cloud generator 
-install.packages("RColorBrewer") # color palettes
+#install.packages("tm")  # for text mining
+#install.packages("SnowballC") # for text stemming
+#install.packages("wordcloud") # word-cloud generator 
+#install.packages("RColorBrewer") # color palettes
 # Load
 library("tm")
 library("SnowballC")
@@ -16,7 +16,7 @@ library("wordcloud")
 library("RColorBrewer")
 
 ##### LOAD DATA
-text <- readLines('text_mining/data/text.txt')
+text <- readLines('data/text.txt')
 # Load the data as a corpus
 docs <- Corpus(VectorSource(text))
 inspect(docs)
@@ -34,9 +34,7 @@ docs <- tm_map(docs, content_transformer(tolower))
 docs <- tm_map(docs, removeNumbers)
 # Remove english common stopwords
 docs <- tm_map(docs, removeWords, stopwords("english"))
-# Remove your own stop word
-# specify your stopwords as a character vector
-docs <- tm_map(docs, removeWords, c("blabla1", "blabla2")) 
+docs <- tm_map(docs, removeWords, c("figure", "data")) 
 # Remove punctuations
 docs <- tm_map(docs, removePunctuation)
 # Eliminate extra white spaces
@@ -62,5 +60,5 @@ wordcloud(words = d$word, freq = d$freq, min.freq = 1,
 findAssocs(dtm, terms = "genes", corlimit = 0.3)
 
 barplot(d[1:10,]$freq, las = 2, names.arg = d[1:10,]$word,
-        col ="lightblue", main ="Most frequent words",
-        ylab = "Word frequencies")
+        col ="lightblue", main ="Most Frequent Words",
+        ylab = "Word Frequencies")
