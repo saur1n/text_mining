@@ -34,7 +34,7 @@ docs <- tm_map(docs, content_transformer(tolower))
 docs <- tm_map(docs, removeNumbers)
 # Remove english common stopwords
 docs <- tm_map(docs, removeWords, stopwords("english"))
-docs <- tm_map(docs, removeWords, c("figure", "data")) 
+docs <- tm_map(docs, removeWords, c("figure", "data","can","-","spotsizer","gitter","sgatools")) 
 # Remove punctuations
 docs <- tm_map(docs, removePunctuation)
 # Eliminate extra white spaces
@@ -51,10 +51,9 @@ head(d, 10)
 
 ##### WORD CLOUD
 set.seed(1234)
-wordcloud(words = d$word, freq = d$freq, min.freq = 1,
-          max.words=200, random.order=FALSE, rot.per=0.35, 
+wordcloud(words = d$word, freq = d$freq, min.freq = 10,
+          max.words=300, random.order=FALSE, rot.per=0.35, 
           colors=brewer.pal(8, "Dark2"))
-
 
 ##### MORE
 findAssocs(dtm, terms = "genes", corlimit = 0.3)
